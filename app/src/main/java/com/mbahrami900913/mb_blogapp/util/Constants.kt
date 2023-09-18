@@ -5,6 +5,7 @@ import com.mbahrami900913.mb_blogapp.data.model.Blog
 object Constants {
     const val SITE_BASE_URL = "https://team-git.iran.liara.run/"
     const val CACHE_TIME = 120
+        const val KEY_BLOG = "keyBlogScreen"
 
     val mockArticle = Blog(
         _id = "-1",

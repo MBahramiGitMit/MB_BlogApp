@@ -111,7 +111,7 @@ fun BlogToolbar(title: String, onBackClicked: () -> Unit, onInfoClicked: () -> U
 
         Text(
             text = title,
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = 16.dp).weight(1f),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Center

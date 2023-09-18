@@ -56,6 +56,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
 import com.mbahrami900913.mb_blogapp.ui.theme.*
+import com.mbahrami900913.mb_blogapp.util.Cache
+import com.mbahrami900913.mb_blogapp.util.Constants
 import com.mbahrami900913.mb_blogapp.util.FadeInOutWidget
 import com.mbahrami900913.mb_blogapp.util.MyScreens
 import com.mbahrami900913.mb_blogapp.util.NetworkChecker
@@ -131,6 +133,7 @@ fun HomeContent(data: List<Blog>, onRequestRefresh: () -> Unit) {
                     .align(Alignment.TopCenter),
                 data = data,
                 onItemClicked = {
+                    Cache.put(key = Constants.KEY_BLOG, value = it)
                     navController.navigate(MyScreens.BlogScreen.route)
                 })
         }
