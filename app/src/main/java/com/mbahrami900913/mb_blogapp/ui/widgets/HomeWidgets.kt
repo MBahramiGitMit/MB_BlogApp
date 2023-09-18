@@ -298,14 +298,14 @@ private fun DrawerMenuItem(
             if (text == "اطلاعات توسعه دهندگان") {
                 DevelopersIds()
             } else {
-//                AppInfo(
-//                    modifier = Modifier.padding(
-//                        top = 8.dp,
-//                        start = 18.dp,
-//                        end = 25.dp,
-//                        bottom = 16.dp
-//                    )
-//                )
+                AppInfo(
+                    modifier = Modifier.padding(
+                        top = 8.dp,
+                        start = 18.dp,
+                        end = 25.dp,
+                        bottom = 16.dp
+                    )
+                )
             }
         }
     }
@@ -397,5 +397,63 @@ private fun Developer(
             )
 
         }
+    }
+}
+
+@Composable
+fun AppInfo(modifier: Modifier) {
+    val uriHandler = LocalUriHandler.current
+
+    val appInfo = """
+        سلام رفقا، صفر تا صد پیاده سازی این این اپ به همراه پیاده سازی بک اند و داشبورد فرانت اند در دوره تیم گیت سایت دانیجت پیاده شده.
+        
+        در این دوره شما استفاده از گیت و گیت هاب برای مدیریت پروژه در یک تیم برنامه نویسی ۴ نفره به همراه مدیر پروژه و طراح ui رو یاد میگیرید که در آموزش های فارسی گیت بی نظیر و بسیار کارامده.
+        این پروژه open source هست و کد اپ و پنل سایت و بک اند رو میتونین در گیت هاب آیدی dunijet به اسم team git پیدا کنین.
+        
+        برای تهیه این دوره کاربری، دوره تیم گیت رو در اینترنت سرچ کنین یا به سایت دانیجت سر بزنین :)
+        
+    """.trimIndent()
+
+    Column(modifier = modifier) {
+
+        Text(
+            text = appInfo,
+            textAlign = TextAlign.Justify,
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(start = 18.dp, top = 10.dp)
+                .clickable {
+                    uriHandler.openUri("https://github.com/dunijet/teamgit-course")
+                },
+            text = "صفحه گیت هاب پروژه",
+            color = cPrimary,
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(start = 18.dp, top = 10.dp)
+                .clickable {
+                    uriHandler.openUri("https://dunijet.ir/product/team-git/")
+                },
+            text = "ورود به دوره تیم گیت",
+            color = cPrimary,
+            style = MaterialTheme.typography.h4
+        )
+
+        Text(
+            modifier = Modifier
+                .padding(start = 18.dp, top = 10.dp)
+                .clickable {
+                    uriHandler.openUri("https://cafebazaar.ir/app/ir.dunijet.teamgit")
+                },
+            text = "تیم گیت در کافه بازار",
+            color = cPrimary,
+            style = MaterialTheme.typography.h4
+        )
+
     }
 }
