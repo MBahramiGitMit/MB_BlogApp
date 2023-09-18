@@ -57,7 +57,9 @@ import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
 import com.mbahrami900913.mb_blogapp.ui.theme.*
 import com.mbahrami900913.mb_blogapp.util.FadeInOutWidget
+import com.mbahrami900913.mb_blogapp.util.MyScreens
 import com.mbahrami900913.mb_blogapp.util.NetworkChecker
+import dev.burnoo.cokoin.navigation.getNavController
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -90,6 +92,7 @@ fun SnackBar(title: String) {
 @Composable
 fun HomeContent(data: List<Blog>, onRequestRefresh: () -> Unit) {
     val context = LocalContext.current
+    val navController = getNavController()
     if (!NetworkChecker(context).isInternetConnected)
         SnackBar(title = "لطفا از اتصال اینترنت خود مطمعن شوید.")
 
@@ -128,7 +131,7 @@ fun HomeContent(data: List<Blog>, onRequestRefresh: () -> Unit) {
                     .align(Alignment.TopCenter),
                 data = data,
                 onItemClicked = {
-                    // TODO: navigate to blog screen
+                    navController.navigate(MyScreens.BlogScreen.route)
                 })
         }
     }
@@ -309,6 +312,7 @@ private fun DrawerMenuItem(
         }
     }
 }
+
 @Composable
 fun DevelopersIds() {
 
@@ -320,6 +324,7 @@ fun DevelopersIds() {
     }
 
 }
+
 @SuppressLint("RememberReturnType")
 @Composable
 private fun Developer(

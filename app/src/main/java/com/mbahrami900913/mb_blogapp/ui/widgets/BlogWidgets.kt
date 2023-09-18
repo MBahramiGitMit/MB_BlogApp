@@ -1,11 +1,13 @@
 package com.mbahrami900913.mb_blogapp.ui.widgets
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,7 +24,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
+import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.ui.theme.cText1
 import com.mbahrami900913.mb_blogapp.ui.theme.cText3
 import com.mbahrami900913.mb_blogapp.ui.theme.radius4
@@ -86,5 +90,35 @@ fun Blog(blog: Blog, onClicked: (Blog) -> Unit) {
             )
         }
 
+    }
+}
+
+@Composable
+fun BlogToolbar(title: String, onBackClicked: () -> Unit, onInfoClicked: () -> Unit) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(72.dp)
+            .background(cBackground)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        MainButton(modifier = Modifier, src = R.drawable.ic_arrow_right) {
+            onBackClicked.invoke()
+        }
+
+        Text(
+            text = title,
+            modifier = Modifier.padding(horizontal = 16.dp),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            textAlign = TextAlign.Center
+        )
+
+        MainButton(modifier = Modifier, src = R.drawable.ic_info) {
+            onInfoClicked.invoke()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.mbahrami900913.mb_blogapp.ui.features
+package com.mbahrami900913.mb_blogapp.ui.features.home
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Box

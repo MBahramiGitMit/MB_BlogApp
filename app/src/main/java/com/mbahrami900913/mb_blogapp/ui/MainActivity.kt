@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mbahrami900913.mb_blogapp.di.myModules
-import com.mbahrami900913.mb_blogapp.ui.features.HomeScreen
+import com.mbahrami900913.mb_blogapp.ui.features.BlogScreen
+import com.mbahrami900913.mb_blogapp.ui.features.home.HomeScreen
 import com.mbahrami900913.mb_blogapp.ui.theme.MB_BlogAppTheme
 import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.util.MyScreens
@@ -58,5 +59,9 @@ fun TeamGitApp() {
         composable(route = MyScreens.HomeScreen.route) {
             HomeScreen()
         }
+        composable(route = MyScreens.BlogScreen.route) {
+            BlogScreen()
+        }
+
     }
 }
