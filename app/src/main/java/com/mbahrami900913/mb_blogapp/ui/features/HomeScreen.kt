@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeContent
+import com.mbahrami900913.mb_blogapp.ui.widgets.HomeToolbar
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.navigation.getNavViewModel
 
@@ -38,7 +38,14 @@ fun HomeScreen() {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(title = { /*TODO*/ })
+            HomeToolbar(
+                onDrawerClicked={
+
+                },
+                onSearchClicked={
+
+                }
+            )
         },
         modifier = Modifier.fillMaxSize(),
         drawerGesturesEnabled = true,

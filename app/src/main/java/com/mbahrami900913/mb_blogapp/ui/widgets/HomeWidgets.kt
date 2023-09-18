@@ -1,11 +1,14 @@
 package com.mbahrami900913.mb_blogapp.ui.widgets
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
@@ -24,14 +27,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
-import com.mbahrami900913.mb_blogapp.ui.theme.cError
-import com.mbahrami900913.mb_blogapp.ui.theme.cText2
-import com.mbahrami900913.mb_blogapp.ui.theme.cText5
 import com.mbahrami900913.mb_blogapp.util.FadeInOutWidget
 import com.mbahrami900913.mb_blogapp.util.NetworkChecker
 import kotlinx.coroutines.delay
+import com.mbahrami900913.mb_blogapp.R
+import com.mbahrami900913.mb_blogapp.ui.theme.*
 
 @Composable
 fun SnackBar(title: String) {
@@ -102,6 +103,30 @@ fun HomeContent(data: List<Blog>, onRequestRefresh: () -> Unit) {
                 onItemClicked = {
                     // TODO: navigate to blog screen
                 })
+        }
+    }
+}
+
+@Composable
+fun HomeToolbar(onDrawerClicked: () -> Unit, onSearchClicked: () -> Unit) {
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(72.dp)
+            .background(cBackground)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        MainButton(modifier = Modifier, src = R.drawable.ic_menu) {
+            onDrawerClicked.invoke()
+        }
+
+        Image(painter = painterResource(id = R.drawable.ic_dunijet), contentDescription = null)
+
+        MainButton(modifier = Modifier, src = R.drawable.ic_search) {
+            onSearchClicked.invoke()
         }
     }
 }
