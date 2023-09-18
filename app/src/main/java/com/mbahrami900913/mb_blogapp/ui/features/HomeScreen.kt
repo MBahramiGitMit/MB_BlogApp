@@ -18,9 +18,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeContent
+import com.mbahrami900913.mb_blogapp.ui.widgets.HomeDrawer
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeToolbar
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.navigation.getNavViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen() {
@@ -39,10 +41,10 @@ fun HomeScreen() {
         scaffoldState = scaffoldState,
         topBar = {
             HomeToolbar(
-                onDrawerClicked={
-
+                onDrawerClicked = {
+                    scope.launch { scaffoldState.drawerState.open() }
                 },
-                onSearchClicked={
+                onSearchClicked = {
 
                 }
             )
@@ -50,7 +52,15 @@ fun HomeScreen() {
         modifier = Modifier.fillMaxSize(),
         drawerGesturesEnabled = true,
         drawerContent = {
-
+            HomeDrawer(onCloseDrawer = {
+                scope.launch {
+                    if (scaffoldState.drawerState.isOpen) {
+                        scaffoldState.drawerState.close()
+                    } else {
+                        activity?.finish()
+                    }
+                }
+            })
         },
         drawerElevation = 2.dp,
         drawerBackgroundColor = cBackground
