@@ -24,12 +24,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
+import com.mbahrami900913.mb_blogapp.ui.theme.cError
+import com.mbahrami900913.mb_blogapp.ui.theme.cText2
+import com.mbahrami900913.mb_blogapp.ui.theme.cText5
 import com.mbahrami900913.mb_blogapp.util.FadeInOutWidget
 import com.mbahrami900913.mb_blogapp.util.NetworkChecker
 import kotlinx.coroutines.delay
-import com.mbahrami900913.mb_blogapp.R
-import com.mbahrami900913.mb_blogapp.ui.theme.*
 
 @Composable
 fun SnackBar(title: String) {
@@ -60,43 +62,46 @@ fun SnackBar(title: String) {
 @Composable
 fun HomeContent(data: List<Blog>, onRequestRefresh: () -> Unit) {
     val context = LocalContext.current
-    if (!NetworkChecker(context).isInternetConnected) {
-        SnackBar(title = "لطفا از اصصال اینترنت خود مطمعن شوید.")
+    if (!NetworkChecker(context).isInternetConnected)
+        SnackBar(title = "لطفا از اتصال اینترنت خود مطمعن شوید.")
 
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            if (data.isEmpty()) {
-                Column(
-                    modifier = Modifier.padding(80.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        modifier = Modifier.size(120.dp),
-                        painter = painterResource(id = R.drawable.ic_no_article),
-                        contentDescription = null
-                    )
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        if (data.isEmpty()) {
+            Column(
+                modifier = Modifier.padding(80.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier.size(120.dp),
+                    painter = painterResource(id = R.drawable.ic_no_article),
+                    contentDescription = null
+                )
+                Text(
+                    text = "مقاله ای برای نمایش وجود ندارد.",
+                    style = MaterialTheme.typography.h5,
+                    color = cText2
+                )
+                TextButton(onClick = { onRequestRefresh.invoke() }) {
                     Text(
-                        text = "مقاله ای برای نمایش وجود ندارد.",
-                        style = MaterialTheme.typography.h5,
-                        color = cText2
+                        text = "بارگذاری مجدد",
+                        style = MaterialTheme.typography.caption,
+                        color = cText5
                     )
-                    TextButton(onClick = { onRequestRefresh.invoke() }) {
-                        Text(
-                            text = "بارگذاری مجدد",
-                            style = MaterialTheme.typography.caption,
-                            color = cText5
-                        )
-                    }
                 }
-            } else {
-
             }
+        } else {
+            BlogList(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.TopCenter),
+                data = data,
+                onItemClicked = {
+                    // TODO: navigate to blog screen
+                })
         }
-
-    } else {
-
     }
 }
