@@ -12,7 +12,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -54,12 +53,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.mbahrami900913.mb_blogapp.R
 import com.mbahrami900913.mb_blogapp.data.model.Blog
+import com.mbahrami900913.mb_blogapp.ui.theme.*
 import com.mbahrami900913.mb_blogapp.util.FadeInOutWidget
 import com.mbahrami900913.mb_blogapp.util.NetworkChecker
 import kotlinx.coroutines.delay
-import com.mbahrami900913.mb_blogapp.R
-import com.mbahrami900913.mb_blogapp.ui.theme.*
 import kotlinx.coroutines.launch
 
 @Composable
@@ -238,7 +237,7 @@ private fun DrawerMenuItem(
                 .padding(top = 14.dp, bottom = 14.dp)
         ) {
 
-            val (title, arrow, detail) = createRefs()
+            val (title, arrow) = createRefs()
 
             Row(
                 modifier = Modifier
@@ -314,7 +313,7 @@ private fun DrawerMenuItem(
 fun DevelopersIds() {
 
     Column {
-        Developer(R.drawable.amir_mohammadi, "aaaaaaaaaaaaa", "برنامه نویس اپ اندروید", "@dunijet")
+        Developer(R.drawable.amir_mohammadi, "امیرحسین محمدی", "برنامه نویس اپ اندروید", "@dunijet")
         Developer(R.drawable.omid_baharifar, "امید بهاری فر", "برنامه نویس پنل فرانت", "@weblax_ir")
         Developer(R.drawable.erfan_yousefi, "عرفان یوسفی", "برنامه نویس بک اند", "@erfanyousefi.ir")
         Developer(R.drawable.soroush_mosapoor, "سروش موسی\u200Cپور", "متخصص دِوآپس", "@codingcogs")
