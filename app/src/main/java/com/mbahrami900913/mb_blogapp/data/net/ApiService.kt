@@ -1,6 +1,7 @@
 package com.mbahrami900913.mb_blogapp.data.net
 
 import com.mbahrami900913.mb_blogapp.data.model.BlogResponse
+import com.mbahrami900913.mb_blogapp.data.model.CategoryResponse
 import com.mbahrami900913.mb_blogapp.util.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,6 +10,10 @@ import retrofit2.http.GET
 interface ApiService {
     @GET("blog")
     suspend fun getBlogs(): BlogResponse
+    @GET("category")
+    suspend fun getCategoryList(): CategoryResponse
+
+
 }
 
 fun createApiService(): ApiService {
