@@ -20,6 +20,7 @@ import com.mbahrami900913.mb_blogapp.di.myModules
 import com.mbahrami900913.mb_blogapp.ui.features.BlogScreen
 import com.mbahrami900913.mb_blogapp.ui.features.LargeImageScreen
 import com.mbahrami900913.mb_blogapp.ui.features.home.HomeScreen
+import com.mbahrami900913.mb_blogapp.ui.features.search.SearchScreen
 import com.mbahrami900913.mb_blogapp.ui.theme.MB_BlogAppTheme
 import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.util.MyScreens
@@ -69,6 +70,9 @@ fun TeamGitApp() {
         }
         composable(route = MyScreens.LargeImageScreen.route) {
             LargeImageScreen()
+        }
+        composable(route = MyScreens.SearchScreen.route) {
+            SearchScreen()
         }
 
     }

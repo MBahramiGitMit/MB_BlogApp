@@ -14,14 +14,14 @@ import kotlinx.coroutines.launch
 
 class SearchViewModel(private val blogRepository: BlogRepository) : ViewModel() {
     private val _blogs = MutableStateFlow<List<Blog>>(emptyList())
-    private val _category = MutableStateFlow<List<Category>>(emptyList())
+    private val _categoryList = MutableStateFlow<List<Category>>(emptyList())
     private val _searchQuery = MutableStateFlow("")
     private val _authors = MutableStateFlow((mutableListOf<String>()))
     private val _filtering = MutableStateFlow(NO_FILTER)
     private val _isLoading = MutableStateFlow(false)
 
     val blogs: StateFlow<List<Blog>> = _blogs
-    val category: StateFlow<List<Category>> = _category
+    val categoryList: StateFlow<List<Category>> = _categoryList
     val searchQuery: StateFlow<String> = _searchQuery
     val authors: StateFlow<List<String>> = _authors
     val filtering: StateFlow<Filtering> = _filtering
@@ -39,22 +39,22 @@ class SearchViewModel(private val blogRepository: BlogRepository) : ViewModel() 
                 val fullBlogList = blogRepository.getBlogs()
 
                 val blogsFilteredByCategory: List<Blog> =
-                    if (filtering.value.categories.isNotEmpty()) {
-                        fullBlogList.filter { filtering.value.categories.contains(it.category) }
+                    if (_filtering.value.categories.isNotEmpty()) {
+                        fullBlogList.filter { _filtering.value.categories.contains(it.category) }
                     } else {
                         fullBlogList
                     }
 
-                val blogsFilteredByAuthor = if (filtering.value.authors.isNotEmpty()) {
-                    blogsFilteredByCategory.filter { filtering.value.authors.contains(it.category) }
+                val blogsFilteredByAuthor = if (_filtering.value.authors.isNotEmpty()) {
+                    blogsFilteredByCategory.filter { _filtering.value.authors.contains(it.category) }
                 } else {
                     blogsFilteredByCategory
                 }
 
-                val blogsFilteredBySearchQuery: List<Blog> = if (searchQuery.value.isNotEmpty()) {
+                val blogsFilteredBySearchQuery: List<Blog> = if (_searchQuery.value.isNotEmpty()) {
                     blogsFilteredByAuthor.filter {
-                        it.title.contains(searchQuery.value) ||
-                                it.content.contains(searchQuery.value)
+                        it.title.contains(_searchQuery.value) ||
+                                it.content.contains(_searchQuery.value)
                     }
                 } else {
                     blogsFilteredByAuthor
@@ -65,8 +65,9 @@ class SearchViewModel(private val blogRepository: BlogRepository) : ViewModel() 
 
             } catch (e: Exception) {
                 Log.e("3636", "fetchBlogs: ${e.message}")
+            } finally {
+                _isLoading.value = false
             }
-            _isLoading.value = false
         }
     }
 
@@ -74,7 +75,7 @@ class SearchViewModel(private val blogRepository: BlogRepository) : ViewModel() 
         viewModelScope.launch() {
             try {
                 val categoryList = blogRepository.getCategoryList()
-                _category.emit(categoryList)
+                _categoryList.emit(categoryList)
             } catch (e: Exception) {
                 Log.e("3636", "fetchBlogs: ${e.message}")
             }
