@@ -11,10 +11,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mbahrami900913.mb_blogapp.ui.widgets.SearchContent
+import com.mbahrami900913.mb_blogapp.ui.widgets.SearchToolbar
 import com.mbahrami900913.mb_blogapp.util.Constants
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.navigation.getNavViewModel
@@ -23,7 +25,7 @@ import dev.burnoo.cokoin.navigation.getNavViewModel
 fun SearchScreen() {
     val vm = getNavViewModel<SearchViewModel>()
     val navController = getNavController()
-    val showFilterDialog by remember { mutableStateOf(false) }
+    var showFilterDialog by remember { mutableStateOf(false) }
 
     val data by vm.blogs.collectAsState()
     val categoryList by vm.categoryList.collectAsState()
@@ -36,11 +38,18 @@ fun SearchScreen() {
 
     Scaffold(
         topBar = {
-            //SearchToolbar()
+            SearchToolbar(
+                edtValue = searchQuery,
+                isFilteringEnabled = isFilterEnabled,
+                onBackPressed = { navController.navigateUp() },
+                onEditChange = {
+                    vm.setSearchQuery(it)
+                },
+                onFilterClicked = { showFilterDialog = true })
         },
         modifier = Modifier.fillMaxSize(),
 
-    ) {
+        ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -54,8 +63,8 @@ fun SearchScreen() {
                         .align(Alignment.Center)
                 )
             } else {
-                SearchContent(data=data)
-                if (showFilterDialog){
+                SearchContent(data = data)
+                if (showFilterDialog) {
                     //SearchDialog()
                 }
             }
