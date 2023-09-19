@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.mbahrami900913.mb_blogapp.ui.widgets.BlogContent
+import com.mbahrami900913.mb_blogapp.ui.widgets.BlogInfoDialog
 import com.mbahrami900913.mb_blogapp.ui.widgets.BlogToolbar
 import com.mbahrami900913.mb_blogapp.util.Cache
 import com.mbahrami900913.mb_blogapp.util.Constants
@@ -37,7 +38,7 @@ fun BlogScreen() {
 
             })
             if (showInfoDialog) {
-
+                BlogInfoDialog(blog = blog, onDismiss = { showInfoDialog = false })
             }
         }
 
