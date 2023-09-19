@@ -20,6 +20,7 @@ import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeContent
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeDrawer
 import com.mbahrami900913.mb_blogapp.ui.widgets.HomeToolbar
+import com.mbahrami900913.mb_blogapp.util.MyScreens
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.navigation.getNavViewModel
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ fun HomeScreen() {
                     scope.launch { scaffoldState.drawerState.open() }
                 },
                 onSearchClicked = {
-
+                    navController.navigate(MyScreens.SearchScreen.route)
                 }
             )
         },

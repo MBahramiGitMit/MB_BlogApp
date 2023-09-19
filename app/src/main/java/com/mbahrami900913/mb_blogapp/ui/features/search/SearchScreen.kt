@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mbahrami900913.mb_blogapp.ui.widgets.SearchContent
 import com.mbahrami900913.mb_blogapp.util.Constants
 import dev.burnoo.cokoin.navigation.getNavController
 import dev.burnoo.cokoin.navigation.getNavViewModel
@@ -53,7 +54,7 @@ fun SearchScreen() {
                         .align(Alignment.Center)
                 )
             } else {
-                //SearchContent()
+                SearchContent(data=data)
                 if (showFilterDialog){
                     //SearchDialog()
                 }
