@@ -1,9 +1,11 @@
 package com.mbahrami900913.mb_blogapp.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -16,6 +18,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mbahrami900913.mb_blogapp.di.myModules
 import com.mbahrami900913.mb_blogapp.ui.features.BlogScreen
+import com.mbahrami900913.mb_blogapp.ui.features.LargeImageScreen
 import com.mbahrami900913.mb_blogapp.ui.features.home.HomeScreen
 import com.mbahrami900913.mb_blogapp.ui.theme.MB_BlogAppTheme
 import com.mbahrami900913.mb_blogapp.ui.theme.cBackground
@@ -25,6 +28,7 @@ import dev.burnoo.cokoin.navigation.KoinNavHost
 import org.koin.android.ext.koin.androidContext
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
@@ -49,6 +53,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun TeamGitApp() {
     val navController = rememberNavController()
@@ -61,6 +66,9 @@ fun TeamGitApp() {
         }
         composable(route = MyScreens.BlogScreen.route) {
             BlogScreen()
+        }
+        composable(route = MyScreens.LargeImageScreen.route) {
+            LargeImageScreen()
         }
 
     }

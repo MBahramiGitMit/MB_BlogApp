@@ -16,6 +16,7 @@ import com.mbahrami900913.mb_blogapp.ui.widgets.BlogInfoDialog
 import com.mbahrami900913.mb_blogapp.ui.widgets.BlogToolbar
 import com.mbahrami900913.mb_blogapp.util.Cache
 import com.mbahrami900913.mb_blogapp.util.Constants
+import com.mbahrami900913.mb_blogapp.util.MyScreens
 import dev.burnoo.cokoin.navigation.getNavController
 
 @Composable
@@ -35,7 +36,7 @@ fun BlogScreen() {
                 .padding(top = it.calculateTopPadding()), contentAlignment = Alignment.BottomCenter
         ) {
             BlogContent(blog = blog, onImageClicked = {
-
+                navController.navigate(MyScreens.LargeImageScreen.route)
             })
             if (showInfoDialog) {
                 BlogInfoDialog(blog = blog, onDismiss = { showInfoDialog = false })
