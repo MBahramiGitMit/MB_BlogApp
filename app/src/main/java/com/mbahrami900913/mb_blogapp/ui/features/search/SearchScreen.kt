@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.mbahrami900913.mb_blogapp.ui.widgets.SearchContent
+import com.mbahrami900913.mb_blogapp.ui.widgets.SearchDialog
 import com.mbahrami900913.mb_blogapp.ui.widgets.SearchToolbar
 import com.mbahrami900913.mb_blogapp.util.Constants
 import dev.burnoo.cokoin.navigation.getNavController
@@ -34,7 +35,7 @@ fun SearchScreen() {
     val filtering by vm.filtering.collectAsState()
     val isLoading by vm.isLoading.collectAsState()
 
-    val isFilterEnabled by remember { mutableStateOf(filtering != Constants.NO_FILTER) }
+    var isFilterEnabled by remember { mutableStateOf(filtering != Constants.NO_FILTER) }
 
     Scaffold(
         topBar = {
@@ -49,11 +50,11 @@ fun SearchScreen() {
         },
         modifier = Modifier.fillMaxSize(),
 
-        ) {
+        ) { paddingValue ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = it.calculateTopPadding()),
+                .padding(top = paddingValue.calculateTopPadding()),
             contentAlignment = Alignment.BottomCenter
         ) {
             if (isLoading) {
@@ -65,7 +66,16 @@ fun SearchScreen() {
             } else {
                 SearchContent(data = data)
                 if (showFilterDialog) {
-                    //SearchDialog()
+                    SearchDialog(
+                        filtering = filtering,
+                        categoryList = categoryList,
+                        authorList = authorList,
+                        onDismissClicked = { showFilterDialog = false },
+                        onSubmitClicked = {
+                            isFilterEnabled= !(it.authors.isEmpty() && it.categories.isEmpty())
+                            vm.changeFiltering(it)
+                        }
+                    )
                 }
             }
         }
